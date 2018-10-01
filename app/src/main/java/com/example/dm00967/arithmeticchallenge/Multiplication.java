@@ -1,20 +1,25 @@
 package com.example.dm00967.arithmeticchallenge;
 
-
-// duplicate this for addition, subtraction, and division
-
+/***
+ * Date: 9/24/2018
+ * Name:David Muller
+ *
+ * This will create a question and create answers
+ *
+ * Need to create super
+***/
 import java.util.Random;
-
-public class Subtraction extends ArithmeticChallenge {
-    // add fields here
+public class Multiplication extends ArithmeticChallenge {
     private int  one,two,switch1,switch2,switch3;
     private int choices[] = new int[3];
 
-    public Subtraction(int TOTAL_LEVELS, int TURNS_PER_LEVEL){
+
+    public Multiplication(int TOTAL_LEVELS, int TURNS_PER_LEVEL){
         super(TOTAL_LEVELS, TURNS_PER_LEVEL);
     }
 
     protected String createQuestion(){
+
         Random rand = new Random();
         one = rand.nextInt(10) + 1;
         two = rand.nextInt(10) + 1;
@@ -29,14 +34,11 @@ public class Subtraction extends ArithmeticChallenge {
         do{
             switch1 = rand.nextInt(5) + 1;
             switch2 = rand.nextInt(5) + 1;
-            switch3 = rand.nextInt(5) + 1;
-        }while(switch1==switch2 || switch1==switch3 || switch2==switch3);
+        }while(switch1==switch2);
 
-        int num = rand.nextInt(3);
         choices[0]= one*two+switch1;
         choices[1]= one*two-switch2;
-        choices[2]= one*two-switch3;
-        choices[num]= one*two;
+        choices[2]= one*two;
         return choices;
     }
 }
