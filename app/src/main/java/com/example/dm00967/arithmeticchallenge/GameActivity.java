@@ -32,20 +32,20 @@ public class GameActivity extends AppCompatActivity {
      *  Chooses type of game and then links screen objects to
      *  this class' fields.  Declares current high score.
      ************************************************************************/
-    private void setViewObjects(){
+    private void setViewObjects() {
         // Get data from Main Activity ************************************************
         Intent intent = getIntent();
         String operation = intent.getStringExtra("Operation");
 
         // Use data to set game object to current game ********************************
-        if(operation.equals("addition"))
-            game = new Addition(1,10); // you may change parameters
-        if(operation.equals("subtraction"))
-            game = new Subtraction(1,10); // you may change parameters
-        if(operation.equals("multiplication"))
-            game = new Multiplication(1,10); // you may change parameters
-        if(operation.equals("division"))
-            game = new Division(1,10); // you may change parameters
+        if (operation.equals("addition"))
+            game = new Addition(1, 10); // you may change parameters
+        if (operation.equals("subtraction"))
+            game = new Subtraction(1, 10); // you may change parameters
+        if (operation.equals("multiplication"))
+            game = new Multiplication(1, 15); // you may change parameters
+        if (operation.equals("division"))
+            game = new Division(1, 10); // you may change parameters
 
         // Assign screen objects to fields ********************************************
         mQuestionText = findViewById(R.id.textViewQuestion);
@@ -63,28 +63,28 @@ public class GameActivity extends AppCompatActivity {
     /************************************************************************
      *  Displays question on view and listens for answer
      ************************************************************************/
-    private void listenForClicks(boolean newQuestion){
-        if(newQuestion)
+    private void listenForClicks(boolean newQuestion) {
+        if (newQuestion)
             game.setQuestionText(game.createQuestion());
         mQuestionText.setText(game.getQuestionText());
         game.setChoices(game.createChoices());
 
 
         // ****** sets choices to view ************************************************
-        for(int index = 0; index < 3; index++){
+        for (int index = 0; index < 3; index++) {
             final int innerIndex = index;
             mChoice[index].setText(game.getChoice(index));
             // ****** listens for user input ******************************************
             mChoice[index].setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
+                public void onClick(View v) {
                     setScoreTextAndProgressBar(game.isCorrect(innerIndex));
                 }
             });
         }
         mMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 System.exit(0);
             }
         });
@@ -93,26 +93,49 @@ public class GameActivity extends AppCompatActivity {
     /************************************************************************
      *  Grades answer and updates score and progress.
      ************************************************************************/
-    private void setScoreTextAndProgressBar(boolean isCorrect){
-// more to be implemented
-        listenForClicks(true);
+    private void setScoreTextAndProgressBar(boolean isCorrect) {
+        int messageResID = (isCorrect) ? R.string.correct_toast : R.string.incorrect_toast;
+        Toast correct = Toast.makeText(GameActivity.this, messageResID, Toast.LENGTH_SHORT);
+        correct.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 320);
+        correct.show();
+        game.setScore(isCorrect);
+        String scoreText = "Score: " + Integer.toString(game.getScore());
+        mScoreText.setText(scoreText);
+        updateHighScore();
+        game.setProgress();
+        mProgressBar.setProgress(game.getProgress());
+        if (game.getProgress() >= 100) //Maximum progress is 100
+            endGame();
+        else
+            listenForClicks(isCorrect);
     }
 
     /************************************************************************
      * Ends game or starts next round.
      ************************************************************************/
-    private void endGame(){
-        // to be implemented
+    private void endGame() {
+        mQuestionText.setText(R.string.win_text);
+        for (int index = 0; index < 3; index++)
+            mChoice[index].setText("");
+        mMenu.setText(R.string.next_button);
     }
 
     protected void retrieveHighScore(String operation) {
-        // to be implemented
-
+        prefs = getSharedPreferences(operation, MODE_PRIVATE);
+        game.setHighScore(prefs.getInt("High Score", 0));
+        String highScoreText = "High Score: " + game.getHighScore();
+        mHighScoreText.setText(highScoreText);
+        String toast = "Current High Score: " + game.getHighScore();
+        Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
     }
 
     protected void updateHighScore() {
-        // to be implemented
-
+        editor = prefs.edit();
+        if (game.getScore() > game.getHighScore()) {
+            String highScoreText = "High Score: " + game.getScore();
+            mHighScoreText.setText(highScoreText);
+            editor.putInt("High Score", game.getScore());
+            editor.apply();
+        }
     }
 }
-

@@ -7,12 +7,20 @@ import java.util.Random;
 public abstract class ArithmeticChallenge {
     // fields initialized here
     private long mStartTime;
+    private long mEndTime;
+    private int mTurnsPerLevel;
     private String mQuestionText;
     private int[] mChoices = new int[3];
     private int cChoice;
+    private int cCorrect;
+    private int cHighScore = 0;
+    private int cProgress;
+    private boolean mCorrect;
 
     public ArithmeticChallenge(int TOTAL_LEVELS, int TURNS_PER_LEVEL){
         // to be implemented
+        mTurnsPerLevel= TURNS_PER_LEVEL;
+
     }
 
     /******************************************************
@@ -49,6 +57,39 @@ public abstract class ArithmeticChallenge {
             mChoices[index] = choices[index];
         }
     }
+    protected void setHighScore(int HighScore){
+        // to be implemented
+            cHighScore= HighScore;
+    }
+    protected int getHighScore(){
+        // to be implemented
+        return cHighScore;
+    }
+    protected void setScore(boolean isCorrect){
+        // to be implemented
+        mEndTime = System.currentTimeMillis();
+        if(isCorrect) {
+            cCorrect += 20-(int)((int)mEndTime-(int)mStartTime)/1000;
+        }
+        else {
+            cCorrect--;
+        }
+
+    }
+    protected int getScore(){
+        // to be implemented
+        return cCorrect;
+    }
+    protected void setProgress(){
+        // to be implemented
+       if (mCorrect) {
+           cProgress += 100 / mTurnsPerLevel;
+       }
+       }
+    protected int getProgress(){
+        // to be implemented
+        return cProgress;
+    }
 
 
     // other getters and setters declared and implemented here
@@ -59,9 +100,14 @@ public abstract class ArithmeticChallenge {
 
     protected boolean isCorrect(int choice){
         // to be implemented
-
-
-        return true;
+        if (mChoices[choice] == cChoice){
+            mCorrect = true;
+            return true;
+        }
+        else{
+            mCorrect= false;
+            return false;
+        }
     }
 
 
@@ -78,7 +124,6 @@ public abstract class ArithmeticChallenge {
             }
         }
     }
-
 
     }
 

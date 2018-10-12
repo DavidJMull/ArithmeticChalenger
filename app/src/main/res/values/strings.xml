@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">ArithmeticChallenge</string>
     <string name="high_score">High Score</string>
-    <string name="high_score_num">23</string>
+    <string name="high_score_num"></string>
     <string name="title">Arithmetic Chalenge</string>
     <string name="exit_button">Exit</string>
     <string name="your_score">Your Score</string>
-    <string name="your_score_num">54</string>
-    <string name="num1">1</string>
-    <string name="operator">+</string>
-    <string name="num2">3</string>
+    <string name="your_score_num"></string>
+    <string name="prob">answer</string>
     <string name="answer1">3</string>
     <string name="answer2">2</string>
     <string name="answer3">4</string>
+    <string name="correct_toast">Correct</string>
+    <string name="incorrect_toast">Incorect</string>
+    <string name="next_button">Next</string>
+    <string name="win_text">You Win!</string>
+
 </resources>

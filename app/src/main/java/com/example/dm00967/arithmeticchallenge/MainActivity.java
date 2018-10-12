@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.imageButton_Multiplication),
                 findViewById(R.id.imageButton_Division)};
         final ImageView instructionExit = findViewById(R.id.imageView_Instructions);
-        final Button instructionButton = findViewById(R.id.button_Instructions);
         final Button exitButton = findViewById(R.id.button_Exit);
 
         // sets operation strings for use in intent put
@@ -54,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // listens for button and instruction view clicks
-        instructionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                instructionExit.setVisibility(View.VISIBLE);
-            }
-        });
-
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

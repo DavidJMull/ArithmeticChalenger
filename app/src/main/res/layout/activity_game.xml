@@ -40,14 +40,6 @@
                 android:textAlignment="center"
                 android:textSize="35sp" />
 
-            <TextView
-                android:id="@+id/high_score_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/high_score_num"
-                android:textAlignment="center"
-                android:textSize="35sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,14 +56,6 @@
                 android:textAlignment="center"
                 android:textSize="35sp" />
 
-            <TextView
-                android:id="@+id/your_score_num"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/your_score_num"
-                android:textAlignment="center"
-                android:textSize="35sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -99,8 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/num1"
+                android:text="@string/prob"
                 android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="35sp" />
 
         </LinearLayout>
@@ -143,7 +128,7 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="351dp"
-        android:layout_height="0dp"
+        android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -159,8 +144,11 @@
         android:id="@+id/buttonMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Menu"
-        tools:layout_editor_absoluteX="341dp"
-        tools:layout_editor_absoluteY="308dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
